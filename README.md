@@ -140,3 +140,5 @@ GitHub: https://github.com/shindeshradha968-ai
 ## ⭐ If you like this project
 
 Give it a ⭐ on GitHub!
+## 🌐 Live Demo
+👉 https://clv-predictor-iywpvqjnnqfmzwwgun9lpd.streamlit.app
