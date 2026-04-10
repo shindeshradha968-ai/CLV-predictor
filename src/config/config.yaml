@@ -1,0 +1,127 @@
+# CLV Predictor Configuration File
+# ================================
+
+# Project Settings
+project:
+  name: "CLV Predictor"
+  version: "1.0.0"
+  description: "Customer Lifetime Value Prediction Application"
+
+# Data Settings
+data:
+  raw_data_path: "data/raw/online_retail.csv"
+  processed_data_path: "data/processed/processed_data.csv"
+  features_path: "data/processed/features.csv"
+  encoding: "utf-8"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  
+  # Column names in the dataset
+  columns:
+    invoice_no: "InvoiceNo"
+    stock_code: "StockCode"
+    description: "Description"
+    quantity: "Quantity"
+    invoice_date: "InvoiceDate"
+    unit_price: "UnitPrice"
+    customer_id: "CustomerID"
+    country: "Country"
+
+# Feature Engineering Settings
+features:
+  # RFM Analysis parameters
+  rfm:
+    recency_weight: 0.25
+    frequency_weight: 0.35
+    monetary_weight: 0.40
+  
+  # Time-based features
+  time_features:
+    - day_of_week
+    - month
+    - quarter
+    - is_weekend
+  
+  # Aggregation periods (in days)
+  aggregation_periods:
+    - 30
+    - 60
+    - 90
+    - 180
+    - 365
+
+# Model Settings
+models:
+  # Available models
+  available_models:
+    - linear_regression
+    - random_forest
+    - xgboost
+  
+  # Default model
+  default_model: "xgboost"
+  
+  # Model save path
+  save_path: "models/"
+  
+  # Linear Regression parameters
+  linear_regression:
+    fit_intercept: true
+    normalize: false
+  
+  # Random Forest parameters
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 5
+    min_samples_leaf: 2
+    random_state: 42
+    n_jobs: -1
+  
+  # XGBoost parameters
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    n_jobs: -1
+    objective: "reg:squarederror"
+
+# Training Settings
+training:
+  test_size: 0.2
+  validation_size: 0.1
+  random_state: 42
+  cross_validation_folds: 5
+
+# Evaluation Metrics
+evaluation:
+  metrics:
+    - mae
+    - mse
+    - rmse
+    - r2
+    - mape
+
+# Streamlit App Settings
+streamlit:
+  page_title: "CLV Predictor"
+  page_icon: "💰"
+  layout: "wide"
+  sidebar_state: "expanded"
+  
+  # Theme settings
+  theme:
+    primary_color: "#FF4B4B"
+    background_color: "#FFFFFF"
+    secondary_background_color: "#F0F2F6"
+    text_color: "#262730"
+
+# Logging Settings
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}"
+  log_file: "logs/clv_predictor.log"
+  rotation: "10 MB"
+  retention: "10 days"
